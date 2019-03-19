@@ -12,6 +12,6 @@ $(function () {
     });
 
     let value = form.$element.find("select[data-column='situacao']").val();
-    if (value === "2")
+    if (value === "2" || value === "4")
         form.$element.find("textarea[data-column='descricao_do_problema']").closest(".parent-input").removeClass("hide");
 });

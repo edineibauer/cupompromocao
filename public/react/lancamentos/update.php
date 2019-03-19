@@ -82,4 +82,8 @@ if ($dadosOld['situacao'] !== "2" && $dados['situacao'] === "2") {
         if (!is_numeric($id))
             $data['error'] = $id;
     }
+} else {
+    \Entity\Entity::delete("pendencias", ["lancamento" => $dados['id']]);
+    \Entity\Entity::delete("cancelamentos", ["lancamento" => $dados['id']]);
+    \Entity\Entity::delete("vendas", ["lancamento" => $dados['id']]);
 }
