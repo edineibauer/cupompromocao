@@ -36,7 +36,7 @@ foreach ($dadosOld as $dadosOldItem) {
                     foreach ($prod as $produtoCesta) {
                         if ($produtoCesta['produto'] == $produtoLancamento['produto']) {
                             $read->exeRead("campanhas", "WHERE id =:id", "id={$campanha}");
-                            if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $read->getResult()[0]['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $read->getResult()[0]['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] <= $read->getResult()[0]['data_de_envio']))) {
+                            if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $dados['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $dados['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] <= $dados['data_de_envio']))) {
                                 if (!isset($venda[$campanha])) {
                                     $venda[$campanha] = [
                                         "funcionario" => $dadosOldItem['funcionario'],
@@ -60,7 +60,7 @@ foreach ($dadosOld as $dadosOldItem) {
 
         if (!empty($venda)) {
             foreach ($venda as $c => $v) {
-                $read->exeRead("vendas", "WHERE lancamento = :l", "l={$v['lancamento']}");
+                $read->exeRead("vendas", "WHERE lancamento = :l && campanha = :c", "l={$v['lancamento']}&c={$c}");
                 if (!$read->getResult()) {
                     $id = \Entity\Entity::add("vendas", $v);
                     if (!is_numeric($id))
@@ -82,7 +82,7 @@ foreach ($dadosOld as $dadosOldItem) {
             if (!is_numeric($id))
                 $data['error'] = $id;
         }
-    } else {
+    } elseif ($dadosOldItem['situacao'] !== "1" && $dados["situacao"] === "1") {
         \Entity\Entity::delete("pendencias", ["lancamento" => $dadosOldItem['id']]);
         \Entity\Entity::delete("cancelamentos", ["lancamento" => $dadosOldItem['id']]);
         \Entity\Entity::delete("vendas", ["lancamento" => $dadosOldItem['id']]);
