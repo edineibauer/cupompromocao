@@ -25,34 +25,56 @@ foreach ($dadosOld as $dadosOldItem) {
 
     } elseif ($dadosOldItem['situacao'] !== "3" && $dados['situacao'] === "3") {
 
-        $produtos = json_decode($dados['produtos'] ?? $dadosOldItem['produtos'], !0);
-        $venda = [];
-        foreach ($produtos as $produtoLancamento) {
-            $read->exeRead("cesta");
+        $read->exeRead("funcionarios", "WHERE id = :ff", "ff={$dados['funcionario']}");
+        if ($read->getResult()) {
+            $loja = $read->getResult()[0]['loja'];
+
+            //Busca lista de Campanhas que o funcionário participa
+            $campanhasAceitas = [];
+            $read->exeRead("campanhas_lojas");
             if ($read->getResult()) {
-                foreach ($read->getResult() as $item) {
-                    $campanha = $item['campanha'];
-                    $prod = json_decode($item['produtos_da_campanha'], !0);
-                    foreach ($prod as $produtoCesta) {
-                        if ($produtoCesta['produto'] == $produtoLancamento['produto']) {
-                            $read->exeRead("campanhas", "WHERE id =:id", "id={$campanha}");
-                            if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $dados['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $dados['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] <= $dados['data_de_envio']))) {
-                                if (!isset($venda[$campanha])) {
-                                    $venda[$campanha] = [
-                                        "funcionario" => $dadosOldItem['funcionario'],
-                                        "lancamento" => $dadosOldItem['id'],
-                                        "data" => date("Y-m-d H:i:s"),
-                                        "campanha" => $item['campanha'],
-                                        "pontos" => $produtoLancamento['quantidade'] * $produtoCesta['pontos']
-                                    ];
-                                } else {
-                                    $venda[$campanha]['pontos'] += $produtoLancamento['quantidade'] * $produtoCesta['pontos'];
+                foreach ($read->getResult() as $campanhas) {
+                    $campanha = json_decode($campanhas['lojas'], !0);
+                    if (is_array($campanha) && !empty($campanha)) {
+                        foreach ($campanha as $item) {
+                            if ($item['loja'] == $loja)
+                                $campanhasAceitas[] = $campanhas['campanha'];
+                        }
+                    }
+                }
+            }
+
+            $produtos = json_decode($dados['produtos'] ?? $dadosOldItem['produtos'], !0);
+            $venda = [];
+            foreach ($produtos as $produtoLancamento) {
+                $read->exeRead("cesta");
+                if ($read->getResult()) {
+                    foreach ($read->getResult() as $cesta) {
+                        if (in_array($cesta['campanha'], $campanhasAceitas)) {
+                            $prod = json_decode($cesta['produtos_da_campanha'], !0);
+                            foreach ($prod as $produtoCesta) {
+                                if ($produtoCesta['produto'] == $produtoLancamento['produto']) {
+                                    $read->exeRead("campanhas", "WHERE id =:id", "id={$cesta['campanha']}");
+                                    if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $dados['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $dados['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] <= $dados['data_de_envio']))) {
+                                        if (!isset($venda[$cesta['campanha']])) {
+                                            $venda[$cesta['campanha']] = [
+                                                "funcionario" => $dadosOldItem['funcionario'],
+                                                "lancamento" => $dadosOldItem['id'],
+                                                "data" => date("Y-m-d H:i:s"),
+                                                "campanha" => $cesta['campanha'],
+                                                "pontos" => $produtoLancamento['quantidade'] * $produtoCesta['pontos']
+                                            ];
+                                        } else {
+                                            $venda[$cesta['campanha']]['pontos'] += $produtoLancamento['quantidade'] * $produtoCesta['pontos'];
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
         }
 
         \Entity\Entity::delete("pendencias", ["lancamento" => $dadosOldItem['id']]);
