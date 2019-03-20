@@ -14,7 +14,9 @@ if ($read->getResult()) {
         $lancamento['data_e_hora_da_venda'] = filter_input(INPUT_POST, 'data_e_hora_da_venda', FILTER_DEFAULT);
         $lancamento['cupom_anexo'] = filter_input(INPUT_POST, 'cupom_anexo', FILTER_DEFAULT);
         $lancamento['produtos'] = filter_input(INPUT_POST, 'produtos', FILTER_DEFAULT);
+        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $lancamento['situacao'] = 1;
+        $lancamento['data_de_envio'] = date("Y-m-d");
 
         $lancamento['cupom_anexo'] = $lancamento['produtos'];
 
@@ -32,13 +34,22 @@ if ($read->getResult()) {
         }
 
         if (empty($data['error'])) {
-            //create lancamento
+
+            //corrige formato da data recebida
             if(preg_match('/^\d\d\/\d\d\/\d\d\d\d\s/i', $lancamento['data_e_hora_da_venda'])) {
                 $hora = explode(" ", $lancamento['data_e_hora_da_venda']);
                 $date = explode("/", $hora[0]);
                 $lancamento['data_e_hora_da_venda'] = $date[2] . "-" . $date[1] . "-" . $date[0] . " " . $hora[1];
             }
 
+            //checa se é uma atualização
+            if(!empty($id) && is_numeric($id) && $id > 0) {
+                $read->exeRead("lancamentos", "WHERE id =:id && situacao = 2", "id={$id}");
+                if($read->getResult()) {
+                    $del = new \Conn\Delete();
+                    $del->exeDelete("lancamentos", "WHERE id =:id && situacao = 2", "id={$id}");
+                }
+            }
             $response = \Entity\Entity::add("lancamentos", $lancamento);
 
             if (is_numeric($response))
