@@ -55,7 +55,7 @@ foreach ($dadosOld as $dadosOldItem) {
                             foreach ($prod as $produtoCesta) {
                                 if ($produtoCesta['produto'] == $produtoLancamento['produto']) {
                                     $read->exeRead("campanhas", "WHERE id =:id", "id={$cesta['campanha']}");
-                                    if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $dados['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $dados['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] <= $dados['data_de_envio']))) {
+                                    if ($read->getResult() && $read->getResult()[0]['inicio_da_vigencia'] <= $dados['data_de_envio'] && ($read->getResult()[0]['termino_da_vigencia'] >= $dados['data_de_envio'] || (!empty($read->getResult()[0]['prazo_da_pendencia']) && $read->getResult()[0]['prazo_da_pendencia'] >= $dados['data_de_envio']))) {
                                         if (!isset($venda[$cesta['campanha']])) {
                                             $venda[$cesta['campanha']] = [
                                                 "funcionario" => $dadosOldItem['funcionario'],
