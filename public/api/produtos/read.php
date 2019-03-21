@@ -1,6 +1,6 @@
 <?php
 
-include_once PATH_HOME . 'public/api/campanhas/read.php';
+include_once PATH_HOME . VENDOR . 'cupompromocao/public/api/campanhas/read.php';
 
 $read = new \Conn\Read();
 $produtos = [];
