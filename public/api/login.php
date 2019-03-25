@@ -20,6 +20,8 @@ if (empty($data['error'])) {
         $data['error'] = $login->getResult();
     } elseif(!empty($_SESSION['userlogin'])) {
         $data['data'] = $_SESSION['userlogin'];
+        $data['data']['data'] = date("d/m/Y H:i:s", strtotime($data['data']['data']));
+        $data['data']['setorData']['data'] =  date("d/m/Y H:i:s", strtotime($data['data']['setorData']['data']));
         unset($data['data']['token_recovery']);
         unset($data['data']['token_expira']);
     } else {

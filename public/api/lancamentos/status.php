@@ -18,10 +18,8 @@ if ($sql->getResult()) {
 
     if ($read->getResult()) {
         foreach ($read->getResult() as $item) {
-            if (!empty($item['prazo_da_pendencia'])) {
-                $dd = explode('-', $item['prazo_da_pendencia']);
-                $item['prazo_da_pendencia'] = $dd[2] . "/" . $dd[1] . "/" . $dd[0];
-            }
+            if (!empty($item['prazo_da_pendencia']))
+                $item['prazo_da_pendencia'] = date("d/m/Y H:i:s", strtotime($item['prazo_da_pendencia']));
             $data['data'][] = ["id" => $item['id'], "status" => $item['situacao'], "mensagem" => $item['descricao_do_problema'] ?? "", "prazo_da_pendencia" => $item['prazo_da_pendencia'] ?? ""];
         }
     }
