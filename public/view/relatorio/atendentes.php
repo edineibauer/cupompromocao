@@ -8,6 +8,4 @@
 </div>
 <div class="col padding-bottom" id="relatorio_atendentes"></div>
 
-<script src="<?=HOME . VENDOR?>cupompromocao/public/assets/relatorio/chart.min.js"></script>
-<script src="<?=HOME . VENDOR?>cupompromocao/public/assets/relatorio/chartFunction.js"></script>
 <script src="<?=HOME . VENDOR?>cupompromocao/public/assets/relatorio/atendentes.js"></script>
