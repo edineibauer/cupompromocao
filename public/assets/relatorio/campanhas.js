@@ -68,7 +68,7 @@ function readClassificacao(campanha, vendas, funcionarios, tpl) {
             });
             campanha.haveClassificacao = campanha.classificacao.length > 0;
 
-            $container.html(Mustache.render(tpl.classificacao, campanha));
+            $container.html(Mustache.render(tpl.campanhas, campanha));
 
             if (campanha.haveClassificacao) {
                 let dados = {

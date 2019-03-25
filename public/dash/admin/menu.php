@@ -72,18 +72,18 @@
 <div class="col hide padding-left menu-relatorio theme-d1 padding-bottom" style="width: 450px;overflow: hidden">
     <div class="menu-li menu-dashboard-lista theme-hover bar-item button z-depth-0 padding-small"
          data-action="page" data-lib="cupompromocao" data-atributo="relatorio/campanhas">
-        <i class="material-icons left">flag</i>
-        <span class="left padding-tiny padding-left">Campanhas</span>
-    </div>
-    <div class="menu-li menu-dashboard-lista theme-hover bar-item button z-depth-0 padding-small"
-         data-action="page" data-lib="cupompromocao" data-atributo="relatorio/classificacao">
         <i class="material-icons left">format_list_numbered</i>
-        <span class="left padding-tiny padding-left">Classificações</span>
+        <span class="left padding-tiny padding-left">Campanhas</span>
     </div>
     <div class="menu-li menu-dashboard-lista theme-hover bar-item button z-depth-0 padding-small"
          data-action="page" data-lib="cupompromocao" data-atributo="relatorio/lojas">
         <i class="material-icons left">store</i>
-        <span class="left padding-tiny padding-left">Lojas/Farmácias</span>
+        <span class="left padding-tiny padding-left">Lojas</span>
+    </div>
+    <div class="menu-li menu-dashboard-lista theme-hover bar-item button z-depth-0 padding-small"
+         data-action="page" data-lib="cupompromocao" data-atributo="relatorio/atendentes">
+        <i class="material-icons left">store</i>
+        <span class="left padding-tiny padding-left">Atendentes</span>
     </div>
     <div class="menu-li menu-dashboard-lista theme-hover bar-item button z-depth-0 padding-small"
          data-action="page" data-lib="cupompromocao" data-atributo="relatorio/produtos">
