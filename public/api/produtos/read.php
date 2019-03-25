@@ -6,7 +6,7 @@ $read = new \Conn\Read();
 $produtos = [];
 
 if(empty($data['error']) && !empty($data['data'])) {
-    foreach ($data['data'] as $datum) {
+    foreach ($data['data']['campanhas'] as $datum) {
         $read->exeRead("cesta", "WHERE campanha = :idCampanha", "idCampanha={$datum['id']}");
         if($read->getResult() && !empty($read->getResult()[0]['produtos_da_campanha'])) {
             foreach (json_decode($read->getResult()[0]['produtos_da_campanha'], !0) as $item) {

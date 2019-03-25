@@ -2,8 +2,8 @@
 
 include_once PATH_HOME . VENDOR . 'cupompromocao/public/api/campanhas/read.php';
 
-if(!empty($data['data'])) {
-    $campanhas = $data['data'];
+if(!empty($data['data']['campanhas'])) {
+    $campanhas = $data['data']['campanhas'];
     $data['data'] = [];
     foreach ($campanhas as $campanha) {
         $sql = new \Conn\SqlCommand();
