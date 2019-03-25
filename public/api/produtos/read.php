@@ -20,4 +20,4 @@ if(empty($data['error']) && !empty($data['data'])) {
     }
 }
 
-$data['data'] = $produtos;
+$data['data'] = ["produtos" => $produtos];

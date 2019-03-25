@@ -24,3 +24,6 @@ if ($sql->getResult()) {
         }
     }
 }
+
+if(!empty($data['data']))
+    $data['data'] = ["status" => $data['data']];

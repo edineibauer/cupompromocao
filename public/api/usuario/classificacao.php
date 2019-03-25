@@ -23,3 +23,6 @@ if(!empty($data['data'])) {
         }
     }
 }
+
+if(!empty($data['data']))
+    $data['data'] = ["classificacao" => $data['data']];

@@ -25,7 +25,7 @@ if ($read->getResult()) {
                     $campanha = json_decode($campanhas['lojas'], !0);
                     if (is_array($campanha) && !empty($campanha)) {
                         foreach ($campanha as $item) {
-                            if ($item['loja'] == $user['loja']['id']) {
+                            if (isset($item['loja']) && isset($user['loja']) && $item['loja'] == $user['loja']['id']) {
                                 $read->exeRead("campanhas", "WHERE id = :cc", "cc={$campanhas['campanha']}");
                                 if ($read->getResult()) {
                                     $cc = $read->getResult()[0];
@@ -50,3 +50,6 @@ if ($read->getResult()) {
 } else {
     $data['error'] = "Token de Usuário Inválido";
 }
+
+if(!empty($data['data']))
+    $data['data'] = ["campanhas" => $data['data']];
