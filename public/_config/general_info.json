@@ -1,0 +1,327 @@
+{
+  "api_chaves": {
+    "belongsTo": []
+  },
+  "campanha": {
+    "belongsTo": []
+  },
+  "config": {
+    "belongsTo": []
+  },
+  "dashboard_note": {
+    "belongsTo": []
+  },
+  "email_envio": {
+    "belongsTo": []
+  },
+  "login_attempt": {
+    "belongsTo": []
+  },
+  "usuarios": {
+    "belongsTo": []
+  },
+  "premios": {
+    "belongsTo": [
+      {
+        "premios_campanha": {
+          "column": "premio",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "produtos": {
+    "belongsTo": [
+      {
+        "produtos_campanha": {
+          "column": "produto",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "produtos_lancamento": {
+          "column": "produto",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "produto": {
+    "belongsTo": []
+  },
+  "campanhas": {
+    "belongsTo": [
+      {
+        "campanhas_lojas": {
+          "column": "campanha",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "cesta": {
+          "column": "campanha",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "vendas": {
+          "column": "campanha",
+          "key": "relation",
+          "relevant": "data",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "produtos_campanha": {
+    "belongsTo": [
+      {
+        "cesta": {
+          "column": "produtos_da_campanha",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "loja": {
+    "belongsTo": [
+      {
+        "funcionario": {
+          "column": "loja",
+          "key": "relation",
+          "relevant": "nome",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "lojas_campanhas": {
+          "column": "loja",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "funcionario": {
+    "belongsTo": []
+  },
+  "lancamento": {
+    "belongsTo": []
+  },
+  "produtos_lancamento": {
+    "belongsTo": [
+      {
+        "lancamentos": {
+          "column": "produtos",
+          "key": "relation",
+          "relevant": "codigo_do_cupom_fiscal",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "campanhas_lojas": {
+    "belongsTo": []
+  },
+  "lojas_campanhas": {
+    "belongsTo": [
+      {
+        "campanhas_lojas": {
+          "column": "lojas",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "premios_campanha": {
+    "belongsTo": [
+      {
+        "campanhas": {
+          "column": "premios",
+          "key": "relation",
+          "relevant": "nome",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "cesta": {
+    "belongsTo": []
+  },
+  "premio": {
+    "belongsTo": [
+      {
+        "premios_campanha": {
+          "column": "premio",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "gestor": {
+    "belongsTo": []
+  },
+  "lojas": {
+    "belongsTo": [
+      {
+        "funcionarios": {
+          "column": "loja",
+          "key": "relation",
+          "relevant": "nome",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "lojas_campanhas": {
+          "column": "loja",
+          "key": "relation",
+          "relevant": "id",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "lancamentos": {
+    "belongsTo": [
+      {
+        "cancelamentos": {
+          "column": "lancamento",
+          "key": "relation",
+          "relevant": "descricao",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "pendencias": {
+          "column": "lancamento",
+          "key": "relation",
+          "relevant": "descricao",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "vendas": {
+          "column": "lancamento",
+          "key": "relation",
+          "relevant": "data",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "funcionarios": {
+    "belongsTo": [
+      {
+        "lancamentos": {
+          "column": "funcionario",
+          "key": "relation",
+          "relevant": "codigo_do_cupom_fiscal",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      },
+      {
+        "vendas": {
+          "column": "funcionario",
+          "key": "relation",
+          "relevant": "data",
+          "grid_class_relational": null,
+          "grid_style_relational": null,
+          "grid_template_relational": null,
+          "datagrid": null
+        }
+      }
+    ]
+  },
+  "vendas": {
+    "belongsTo": []
+  },
+  "pendencias": {
+    "belongsTo": []
+  },
+  "cancelamentos": {
+    "belongsTo": []
+  },
+  "teste": {
+    "belongsTo": []
+  },
+  "api_chave": {
+    "belongsTo": []
+  },
+  "testes": {
+    "belongsTo": []
+  }
+}
