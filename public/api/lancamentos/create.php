@@ -15,11 +15,10 @@ if ($read->getResult()) {
             $lancamento['data_e_hora_da_venda'] = filter_input(INPUT_POST, 'data_e_hora_da_venda', FILTER_DEFAULT);
             $lancamento['cupom_anexo'] = filter_input(INPUT_POST, 'cupom_anexo', FILTER_DEFAULT);
             $lancamento['produtos'] = filter_input(INPUT_POST, 'produtos', FILTER_DEFAULT);
+            $lancamento['produtos'] = $lancamento['produtos']['produtos'];
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
             $lancamento['situacao'] = 1;
             $lancamento['data_de_envio'] = date("Y-m-d");
-
-            $lancamento['cupom_anexo'] = $lancamento['produtos'];
 
             if (\Helpers\Check::isJson($lancamento['produtos'])) {
                 $produtoTest = json_decode($lancamento['produtos'], !0);
