@@ -1,0 +1,32 @@
+{
+  "title": "Farmagnus",
+  "js": [
+    "jquery",
+    "hammer",
+    "mustache",
+    "toast",
+    "chart",
+    "chartFunction",
+    "helpers",
+    "mask",
+    "grid",
+    "form",
+    "formValidate",
+    "app",
+    "header"
+  ],
+  "css": [
+    "normalize",
+    "toast",
+    "cssIcon",
+    "dropzone",
+    "app",
+    "header"
+  ],
+  "font": [
+    "roboto"
+  ],
+  "icon": [
+    "material"
+  ]
+}
