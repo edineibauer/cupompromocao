@@ -21,7 +21,7 @@ if ($read->getResult()) {
         $produtos[$p['id']] = $p['nome'];
 
     $sql = new SqlCommand();
-    $sql->exeCommand("SELECT l.*, l.produtos FROM " . PRE . "vendas as v JOIN " . PRE . "lancamentos as l ON v.lancamento = l.id " . $chart->getWhereDate("v.data"));
+    $sql->exeCommand("SELECT l.*, l.produtos FROM " . PRE . "vendas as v JOIN " . PRE . "lancamentos as l ON v.lancamento = l.id " . $chart->getWhereDate("v.data") . " LIMIT 10");
     if ($sql->getResult()) {
         foreach ($sql->getResult() as $item) {
             if (!empty($item['produtos']) && Check::isJson($item['produtos'])) {

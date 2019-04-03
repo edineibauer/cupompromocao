@@ -35,7 +35,7 @@ if (!empty($link->getVariaveis()[1])) {
                 . " FROM " . PRE . "vendas as v "
                 . " JOIN " . PRE . "lancamentos as l"
                 . " JOIN " . PRE . "funcionarios as f"
-                . " ON v.lancamento = l.id AND v.funcionario = f.id " . $whereDate);
+                . " ON v.lancamento = l.id AND v.funcionario = f.id " . $whereDate . " LIMIT 10");
 
             if ($sql->getResult()) {
                 foreach ($sql->getResult() as $item) {

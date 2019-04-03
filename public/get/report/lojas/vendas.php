@@ -13,7 +13,7 @@ $chart->setTime($link->getVariaveis()[0] ?? 30);
 
 $dados = [];
 $sql = new SqlCommand();
-$sql->exeCommand("SELECT f.loja, v.pontos, l.razao_social, la.produtos FROM " . PRE . "vendas as v JOIN " . PRE . "funcionarios as f JOIN " . PRE . "lojas as l JOIN " . PRE . "lancamentos as la ON v.funcionario = f.id AND f.loja = l.id AND v.lancamento = la.id " . $chart->getWhereDate("v.data"));
+$sql->exeCommand("SELECT f.loja, v.pontos, l.razao_social, la.produtos FROM " . PRE . "vendas as v JOIN " . PRE . "funcionarios as f JOIN " . PRE . "lojas as l JOIN " . PRE . "lancamentos as la ON v.funcionario = f.id AND f.loja = l.id AND v.lancamento = la.id " . $chart->getWhereDate("v.data") . " LIMIT 10");
 if ($sql->getResult()) {
     foreach ($sql->getResult() as $item) {
         if (!isset($dados[$item['loja']]))

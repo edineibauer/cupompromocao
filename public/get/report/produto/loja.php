@@ -31,7 +31,7 @@ if (!empty($link->getVariaveis()[1])) {
 
             $sql = new SqlCommand();
             $sql->exeCommand("SELECT l.*, l.produtos FROM " . PRE . "vendas as v JOIN " . PRE . "lancamentos as l JOIN " . PRE . "funcionarios as f ON v.lancamento = l.id AND v.funcionario = f.id "
-            . (!empty($whereDate) ? $whereDate . " AND" : "WHERE ") . " f.loja = {$idLoja}");
+            . (!empty($whereDate) ? $whereDate . " AND" : "WHERE ") . " f.loja = {$idLoja}" . " LIMIT 10");
             if ($sql->getResult()) {
                 foreach ($sql->getResult() as $item) {
                     if (!empty($item['produtos']) && Check::isJson($item['produtos'])) {
