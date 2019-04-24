@@ -29,6 +29,8 @@ if ($read->getResult()) {
                                 $read->exeRead("campanhas", "WHERE id = :cc", "cc={$campanhas['campanha']}");
                                 if ($read->getResult()) {
                                     $cc = $read->getResult()[0];
+                                    $read->exeRead("premios", "WHERE id = :idp", "idp={$cc['tipo_da_premiacao']}");
+                                    $cc['tipo_da_premiacao'] = $read->getResult() ? $read->getResult()[0]['descricao'] : "";
                                     $cc['divulgacao'] = date("d/m/Y H:i:s", strtotime($cc['divulgacao']));
                                     $cc['prazo_para_cadastro'] = date("d/m/Y H:i:s", strtotime($cc['prazo_para_cadastro']));
                                     $cc['inicio_da_vigencia'] = date("d/m/Y H:i:s", strtotime($cc['inicio_da_vigencia']));
