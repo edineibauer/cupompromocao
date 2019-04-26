@@ -110,7 +110,7 @@ if ($read->getResult()) {
                 }
 
                 if (is_numeric($response))
-                    $data = ['response' => 1, 'data' => ["id" => (string) $response], 'error' => ''];
+                    $data = ['response' => 1, 'data' => ["id" => (int) $response], 'error' => ''];
                 else
                     $data['error'] = $response;
             }
